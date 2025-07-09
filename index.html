@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Para Mi corazon de melon❣️</title>
+  <title>Para mi Corazón de Melón 🍈💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       padding: 0;
       min-height: 100vh;
-      background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+      background: linear-gradient(135deg, #ffe0ec 0%, #f3e6ff 100%);
       font-family: 'Segoe UI', Arial, sans-serif;
       display: flex;
       align-items: center;
@@ -18,54 +18,56 @@
       overflow-x: hidden;
     }
     .card {
-      background: rgba(255,255,255,0.92);
-      border-radius: 24px;
-      box-shadow: 0 8px 32px rgba(44,62,80,0.12);
-      padding: 40px 35px 30px 35px;
-      max-width: 390px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 28px;
+      box-shadow: 0 8px 32px rgba(241, 96, 188, 0.14);
+      padding: 44px 35px 32px 35px;
+      max-width: 410px;
       text-align: center;
       z-index: 2;
       position: relative;
     }
     .heart {
       font-size: 3em;
-      color: #ff7eb9;
-      margin-bottom: 10px;
-      animation: heartBeat 1.2s infinite;
+      color: #ff5cab;
+      margin-bottom: 12px;
+      animation: heartBeat 1.3s infinite;
     }
     @keyframes heartBeat {
       0%,100%{transform:scale(1);}
-      20%{transform:scale(1.13);}
-      40%{transform:scale(0.95);}
-      60%{transform:scale(1.09);}
-      80%{transform:scale(0.98);}
+      20%{transform:scale(1.14);}
+      40%{transform:scale(0.96);}
+      60%{transform:scale(1.10);}
+      80%{transform:scale(0.99);}
     }
     h2 {
-      margin: 0 0 10px 0;
-      color: #444;
-      font-weight: 600;
+      margin: 0 0 12px 0;
+      color: #a1004c;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
     .btn {
-      background: linear-gradient(90deg,#94dfff,#ff7eb9);
+      background: linear-gradient(90deg,#ffb6ec,#ff5cab);
       color: #fff;
       border: none;
       padding: 12px 36px;
       border-radius: 30px;
-      font-size: 1.1em;
+      font-size: 1.12em;
       cursor: pointer;
       margin-top: 24px;
       transition: background 0.3s;
       box-shadow: 0 2px 8px rgba(44,62,80,0.07);
     }
     .btn:hover {
-      background: linear-gradient(90deg,#ff7eb9,#94dfff);
+      background: linear-gradient(90deg,#ff5cab,#ffb6ec);
     }
     .mensaje {
       margin-top: 28px;
-      font-size: 1.12em;
-      color: #333;
+      font-size: 1.14em;
+      color: #a1004c;
       animation: aparecer 1.2s;
       display: none;
+      font-weight: 500;
     }
     @keyframes aparecer {
       from { opacity: 0; transform: translateY(16px);}
@@ -91,7 +93,7 @@
       margin-bottom: 8px;
     }
     @media (max-width: 500px) {
-      .card { padding: 25px 9vw; }
+      .card { padding: 28px 7vw; }
       .music-box iframe { width: 90vw; height: 40vw; min-width: 220px; min-height: 124px;}
     }
   </style>
@@ -99,22 +101,21 @@
 <body>
   <canvas class="hearts-canvas"></canvas>
   <div class="card">
-    <div class="heart">(^-^)/💖</div>
-    <h2>Hola, mi corazónde melon🎁</h2>
+    <div class="heart">🍈💖</div>
+    <h2>Hola, mi Corazón de Melón</h2>
     <p>Haz clic en el botón para leer tu mensaje especial.</p>
     <button class="btn" onclick="mostrarMensaje()">Ver mensaje</button>
     <div class="mensaje" id="mensaje">
-      Eres mi persona favorita y cada día a tu lado es un regalo.<br>
-      Gracias por tu amor, tu ternura y por ser mi todo.<br>
-      ¡Te amo hoy y siempre! 💗
-      I love you
-      descansa te amo mucho💤💤💤💤
+      Eres la dulzura que le da sentido a mis días,<br>
+      mi alegría, mi confidente y mi razón de sonreír.<br>
+      Gracias por existir, por tu amor inmenso y por ser mi corazón de melón.<br>
+      ¡Te amo más de lo que las palabras pueden decir! 💗🍈
     </div>
     <div class="music-box">
-      <span>♪ Julio Iglesias - Spanish Girl ♪</span>
+      <span>♪ Elijo amarte - Rombai ♪</span>
       <iframe width="320" height="180"
-        src="https://youtu.be/s_MexVOFApw?si=vZxlMSXi1AlELimMautoplay=0"
-        title="Julio Iglesias - Spanish Girl"
+        src="https://www.youtube.com/embed/c2A1oU_1dIA?autoplay=0"
+        title="Elijo amarte - Rombai"
         frameborder="0"
         allow="autoplay; encrypted-media"
         allowfullscreen>
@@ -136,12 +137,12 @@
     function createHeart() {
       const x = Math.random() * canvas.width;
       const y = Math.random() * -canvas.height;
-      const size = Math.random() * 18 + 12;
-      const speed = Math.random() * 1.2 + 0.4;
+      const size = Math.random() * 16 + 14;
+      const speed = Math.random() * 1.1 + 0.4;
       const alpha = Math.random() * 0.3 + 0.7;
       const rotate = Math.random() * Math.PI * 2;
-      const rotateSpeed = (Math.random() - 0.5) * 0.02;
-      const color = (Math.random() < 0.5) ? "#ff7eb9" : "#ff3e55";
+      const rotateSpeed = (Math.random() - 0.5) * 0.015;
+      const color = (Math.random() < 0.5) ? "#ff5cab" : "#ffb6ec";
       return {x, y, size, speed, alpha, rotate, rotateSpeed, color};
     }
     function drawHeart(ctx, x, y, size, color, alpha, rotate) {
@@ -177,7 +178,7 @@
     }
     function initHearts() {
       hearts = [];
-      let n = Math.max(44, Math.floor(window.innerWidth / 18));
+      let n = Math.max(50, Math.floor(window.innerWidth / 15));
       for (let i = 0; i < n; i++) hearts.push(createHeart());
       drawHearts();
     }
