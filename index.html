@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Mi Snowy ❄️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    .card {
+      background: rgba(255,255,255,0.92);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(44,62,80,0.12);
+      padding: 40px 35px 30px 35px;
+      max-width: 390px;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+    }
+    .heart {
+      font-size: 3em;
+      color: #ff7eb9;
+      margin-bottom: 10px;
+      animation: heartBeat 1.2s infinite;
+    }
+    @keyframes heartBeat {
+      0%,100%{transform:scale(1);}
+      20%{transform:scale(1.13);}
+      40%{transform:scale(0.95);}
+      60%{transform:scale(1.09);}
+      80%{transform:scale(0.98);}
+    }
+    h2 {
+      margin: 0 0 10px 0;
+      color: #444;
+      font-weight: 600;
+    }
+    .btn {
+      background: linear-gradient(90deg,#94dfff,#ff7eb9);
+      color: #fff;
+      border: none;
+      padding: 12px 36px;
+      border-radius: 30px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 24px;
+      transition: background 0.3s;
+      box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+    }
+    .btn:hover {
+      background: linear-gradient(90deg,#ff7eb9,#94dfff);
+    }
+    .mensaje {
+      margin-top: 28px;
+      font-size: 1.12em;
+      color: #333;
+      animation: aparecer 1.2s;
+      display: none;
+    }
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(16px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .hearts-canvas {
+      pointer-events: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 1;
+    }
+    .music-box {
+      margin-top: 28px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .music-box span {
+      font-size: 1em;
+      color: #888;
+      margin-bottom: 8px;
+    }
+    @media (max-width: 500px) {
+      .card { padding: 25px 9vw; }
+      .music-box iframe { width: 90vw; height: 40vw; min-width: 220px; min-height: 124px;}
+    }
+  </style>
+</head>
+<body>
+  <canvas class="hearts-canvas"></canvas>
+  <div class="card">
+    <div class="heart">💖</div>
+    <h2>Hola, mi Snowy ❄️</h2>
+    <p>Haz clic en el botón para leer tu mensaje especial.</p>
+    <button class="btn" onclick="mostrarMensaje()">Ver mensaje</button>
+    <div class="mensaje" id="mensaje">
+      Eres mi persona favorita y cada día a tu lado es un regalo.<br>
+      Gracias por tu amor, tu ternura y por ser mi Snowy.<br>
+      ¡Te amo hoy y siempre! 💗
+    </div>
+    <div class="music-box">
+      <span>♪ Julio Iglesias - Spanish Girl ♪</span>
+      <iframe width="320" height="180"
+        src="https://www.youtube.com/embed/8V5nB5jjfF8?autoplay=0"
+        title="Julio Iglesias - Spanish Girl"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+  <script>
+    function mostrarMensaje() {
+      document.getElementById('mensaje').style.display = 'block';
+    }
+    // Corazones animados
+    const canvas = document.querySelector('.hearts-canvas');
+    const ctx = canvas.getContext('2d');
+    let hearts = [];
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    function createHeart() {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * -canvas.height;
+      const size = Math.random() * 18 + 12;
+      const speed = Math.random() * 1.2 + 0.4;
+      const alpha = Math.random() * 0.3 + 0.7;
+      const rotate = Math.random() * Math.PI * 2;
+      const rotateSpeed = (Math.random() - 0.5) * 0.02;
+      const color = (Math.random() < 0.5) ? "#ff7eb9" : "#ff3e55";
+      return {x, y, size, speed, alpha, rotate, rotateSpeed, color};
+    }
+    function drawHeart(ctx, x, y, size, color, alpha, rotate) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(x, y);
+      ctx.rotate(rotate);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.bezierCurveTo(0, -size / 2, -size, -size / 2, -size, 0);
+      ctx.bezierCurveTo(-size, size, 0, size * 1.4, 0, size * 2);
+      ctx.bezierCurveTo(0, size * 1.4, size, size, size, 0);
+      ctx.bezierCurveTo(size, -size / 2, 0, -size / 2, 0, 0);
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.shadowColor = "#ffb6d5";
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.restore();
+    }
+    function drawHearts() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hearts.forEach(heart => {
+        drawHeart(ctx, heart.x, heart.y, heart.size, heart.color, heart.alpha, heart.rotate);
+        heart.y += heart.speed;
+        heart.rotate += heart.rotateSpeed;
+        if (heart.y > canvas.height + heart.size * 2) {
+          heart.x = Math.random() * canvas.width;
+          heart.y = -heart.size * 2;
+        }
+      });
+      requestAnimationFrame(drawHearts);
+    }
+    function initHearts() {
+      hearts = [];
+      let n = Math.max(44, Math.floor(window.innerWidth / 18));
+      for (let i = 0; i < n; i++) hearts.push(createHeart());
+      drawHearts();
+    }
+    window.addEventListener('resize', () => {
+      resize();
+      initHearts();
+    });
+    resize();
+    initHearts();
+  </script>
+</body>
+</html>
